@@ -1,0 +1,13 @@
+{
+    "devDependencies": {
+        
+        "@babel/cli": "^7.17.6",
+        "@babel/core": "^7.17.8",
+        "@babel/preset-env": "^7.16.11"
+    },
+    "scripts": {
+        "compil": "babel src -d public/js --watch",
+        "build": "babel src/controller -d controller --watch",
+        "obfus": "javascript-obfuscator controller --log true --compact true --rename-properties true --split-strings true --string-array true --string-array-encoding \"rc4\" --disable-console-output --output  controller/obfuscado"
+    }
+}
