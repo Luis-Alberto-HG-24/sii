@@ -31,9 +31,9 @@
                             </div>
                             
                             <div class="d-grid gap-3 mt-3">
-                                <button type="button" class="btn btn-primary btn-block" id="btn_generar" name="btn_generar"><i class="fas fa-plus-circle"></i> Generar Vista Previa</button>
-                                <button type="button" class="btn btn-success btn-block" id="btn_aprobar" name="btn_aprobar"><i class="fas fa-check"></i> Aprobar</button>
-                                <button type="button" class="btn btn-danger btn-block" id="btn_rechazar" name="btn_rechazar"><i class="fas fa-times"></i> Rechazar</button>
+                                <button type="button" class="btn btn-outline-primary btn-acad btn-block" id="btn_generar" name="btn_generar"><i class="fas fa-plus-circle"></i> Generar Vista Previa</button>
+                                <button type="button" class="btn btn-outline-success btn-acad btn-block" id="btn_aprobar" name="btn_aprobar"><i class="fas fa-check"></i> Aprobar</button>
+                                <button type="button" class="btn btn-outline-danger btn-acad btn-block" id="btn_rechazar" name="btn_rechazar"><i class="fas fa-times"></i> Rechazar</button>
                             </div>
                         </form>
                         

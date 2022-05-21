@@ -238,7 +238,6 @@
                         <div class="col-lg-12 text-end">
                             <div class="btn-group">
                                 <button class="btn btn-primary" type="submit"><i class="fas fa-plus me-2"></i>Registrar horario</button>
-                                <a title="Regresar" href="<?=Router::redirigir('dep_dashboard')?>" class="btn btn-danger"><i class="fas fa-ban me-2"></i>Cancelar</a>
                             </div>
                         </div>
                     </div>

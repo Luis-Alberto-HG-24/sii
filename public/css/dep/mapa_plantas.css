@@ -1,4 +1,7 @@
 
+.svg-planta{
+    width: 100%;
+}
 
 
 
@@ -19,6 +22,4 @@
 .AulaA5 path:hover{
     fill: rgb(23, 204, 236);
     transition: color,0.3s;
-
-
 }

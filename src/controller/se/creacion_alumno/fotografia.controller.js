@@ -74,7 +74,7 @@ function mostar_area_recorte(url){
 function precargar_foto(){
     ver ++;
     $('#input_file').css("display", "none");
-    var span = '<span class="btn-cancelar"><a href="#" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><img class="thumb rounded" src="public/img/se/fotografia.webp?ver='+ ver +'" title="Fotografia alumno"/></a><div class="boton-emergente"><button onclick="limpiar_foto()" class="btn btn-img btn-sm" type="button" title="Eliminar"><i class="fas fa-times" style="font-size: 9px; margin-left: -3px"></></button></div></span>';
+    var span = '<span class="btn-cancelar redimension"><a href="#" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><img class="thumb rounded" src="public/img/se/fotografia.webp?ver='+ ver +'" title="Fotografia alumno"/></a><div class="boton-emergente"><button onclick="limpiar_foto()" class="btn btn-img btn-sm" type="button" title="Eliminar"><i class="fas fa-times" style="font-size: 9px; margin-left: -3px"></></button></div></span>';
     $('#img_foto').html(span);
 }
 

@@ -10,11 +10,12 @@ if (!Sesion::validar_sesion()) {
 <div class="container">
     <div class="row my-5">
         <div class="col-md-12">
-            <h1 class="border-bottom text-center pb-2 text-uppercase">Generar matricula</h1>
+            <h1 class="border-bottom text-center pb-2 text-uppercase">Generar reticula</h1>
         </div>
         <div class="row my-5">
             <form action="">
                 <div class="row">
+                    <div class="col-lg-4"></div>
                     <div class="col-lg-4">
                         <label for="carrera" class="form-label">Carrera</label>
                         <div class="input-group mb-3">
@@ -24,7 +25,7 @@ if (!Sesion::validar_sesion()) {
                             </select>
                         </div>
                     </div>
-                    
+                    <div class="col-lg-4"></div>
                 </div>
             </form>
         </div>

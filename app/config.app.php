@@ -38,9 +38,9 @@
        
         // vistas ADMIN
         'dashboard' => 'view/admin/admin_dashboard.view',
-        'aula' => 'view/admin/aula.view',
+        'crear_aula_admin' => 'view/admin/aula.view',
         'usuarios' => 'view/admin/usuarios.view',
-        'generar_matricula' => 'view/admin/creacion_matricula.view',
+        'generar_reticula_admin' => 'view/admin/creacion_reticula.view',
         'materias' => 'view/admin/materias.view',
         
         // vistas DEP

@@ -14,10 +14,10 @@ Redireccion::validar_vista("DEP");
     </div>
     <form id="frm_agregar_paralelo" enctype="multipart/form-data" method="POST">
         <div class="row">
-
+            <!-- GRUPO DE ORIGEN -->
             <div class="col-lg-4 col-md-6 text-start card-form me-5 offset-2">
                 <h1 class="text-center lead mb-5">Grupo Origen</h1>
-                <div class="mb-5">
+                <div class="mb-4">
                     <label for="carrera" class="form-label">Carrera</label>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class="fas fa-graduation-cap"></i></span>
@@ -26,7 +26,7 @@ Redireccion::validar_vista("DEP");
                         </select>
                     </div>
                 </div>
-                <div class="mb-5">
+                <div class="mb-4">
                     <label for="semestre" class="form-label">semestre</label>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class="fas fa-user-clock"></i></span>
@@ -35,8 +35,26 @@ Redireccion::validar_vista("DEP");
                         </select>
                     </div>
                 </div>
-            </div>
-
+                <div class="mb-4">
+                    <label for="materia" class="form-label">Materia</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fas fa-book"></i></span>
+                        <select class="form-select break_size" name="materia">
+                            <option value="">Eligir Materia</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="grupo" class="form-label">Grupo</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fas fa-user-group"></i></span>
+                        <select class="form-select break_size" name="materia">
+                            <option value="">Eligir Grupo</option>
+                        </select>
+                    </div>
+                </div>
+            </div>  
+            <!-- GRUPO DE PARALELO -->
             <div class="col-lg-4 col-md-6 text-start card-form">
                 <h1 class="text-center lead mb-5">Grupo Paralelo</h1>
                 <div class="mb-5">
@@ -57,14 +75,21 @@ Redireccion::validar_vista("DEP");
                         </select>
                     </div>
                 </div>
+                <div class="mb-5">
+                    <label for="grupo" class="form-label">Grupo</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fas fa-user-group"></i></span>
+                        <select class="form-select break_size" name="materia">
+                            <option value="">Eligir Grupo</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="row my-5">
             <div class="col-lg-12 text-end">
                 <span class="btn btn-primary" id="button_create"><i class="fas fa-plus me-2"></i>Crear</span>
-                <a href="<?=Router::redirigir('dep_dashboard')?>" class="btn btn-secondary"><i class="fas fa-ban me-2"></i>Cancelar</a>
-
             </div>
         </div>
     </form>
@@ -83,12 +108,7 @@ Redireccion::validar_vista("DEP");
                         <th>Eliminar</th>
                     </thead>
                     <tbody>
-                        <!-- <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td> -->
+                       
                     </tbody>
                 </table>
             </div>
