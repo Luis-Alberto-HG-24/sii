@@ -1,8 +1,9 @@
 <?php
-    if (!Sesion::validar_sesion()) {
-        Redireccion::redirigir("login");
-    }
-    Redireccion::validar_vista("ADMIN");
+$title = "INICIO";
+if (!Sesion::validar_sesion()) {
+    Redireccion::redirigir("login");
+}
+Redireccion::validar_vista("ADMIN");
 ?>
 
 <div class="container">
@@ -30,11 +31,11 @@
                     </a>
                 </div>
                 <div class="col mb-5">
-                    <a href="#">
+                    <a href="<?= Router::redirigir('materias')?>">
                         <div class="card-pricing text-center mb-3 h-100">
                             <div class="card-body">
-                                <i class="img-fluid fab fa-9x fa-algolia icono mb-4"></i>
-                                <h6 class="card-title">Pendiente</h6>
+                                <i class="img-fluid fas fa-9x fa-book icono mb-4"></i>
+                                <h6 class="card-title">Materias</h6>
                             </div>
                         </div>
                     </a>

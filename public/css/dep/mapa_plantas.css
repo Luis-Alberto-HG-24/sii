@@ -1,0 +1,24 @@
+
+
+
+
+.planta-baja path{
+    fill: black;
+}
+
+.planta-baja path:hover{
+    fill: rgb(23, 204, 236);
+    transition: color,0.3s;
+}
+
+
+.AulaA5 path{
+    fill: black;
+}
+
+.AulaA5 path:hover{
+    fill: rgb(23, 204, 236);
+    transition: color,0.3s;
+
+
+}

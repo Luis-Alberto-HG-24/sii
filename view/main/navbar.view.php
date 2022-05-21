@@ -109,6 +109,16 @@
                 </div>
             </a>
         </div>
+        <div class="item">
+            <a href="<?=Router::redirigir('materias')?>" title="Materias">
+                <div class="ico text-center">
+                  <i class="fas fa-book"></i>
+                </div>
+                <div class="title">
+                    <span>Materias</span>
+                </div>
+            </a>
+        </div>
         <?php elseif(Sesion::datos_sesion('rol') == 'DEP'):?>
         <div class="item">
             <a href="<?=Router::redirigir('home')?>" title="Dashboard">
@@ -203,17 +213,6 @@
             </a>
         </div>
         <?php endif ?>
-        <div class="item">
-            <a href="<?= Router::redirigir('about') ?>" title="Usuario Actual">
-                <div class="ico text-center">
-                <i class="fa-solid fa-address-card"></i>
-                </div>
-                <div class="title">
-                    <span>Información de Usuario</span>
-                </div>
-
-            </a>
-        </div>
         <div class="item">
             <a data-bs-toggle="modal" data-bs-target="#modal_ciclo">
                 <div class="ico text-center">

@@ -210,7 +210,6 @@ var funciones = {
     input.map(function () {});
   }
 };
-var bgData = {};
 
 var Consultas = /*#__PURE__*/function () {
   /**
@@ -300,8 +299,9 @@ var Consultas = /*#__PURE__*/function () {
       });
     }
   }, {
-    key: "consulta",
-    value: function consulta() {
+    key: "seleccion",
+    value: function seleccion() {
+      var resultado;
       cargar();
       fetch("model/".concat(this.modelo, ".model.php"), {
         method: "".concat(this.metodo),
@@ -309,12 +309,13 @@ var Consultas = /*#__PURE__*/function () {
       }).then(function (respuesta) {
         return respuesta.json();
       }).then(function (respuesta) {
-        return respuesta.text();
         finalizado();
+        resultado = respuesta;
       })["catch"](function (error) {
         finalizado();
         msj_error("".concat(error));
       });
+      return resultado;
     }
   }, {
     key: "catalogo",

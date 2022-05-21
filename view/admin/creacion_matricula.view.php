@@ -30,3 +30,4 @@ if (!Sesion::validar_sesion()) {
         </div>
     </div>
 </div>
+<a href="dashboard" class="btn btn-flotante"><i class="fa-solid fa-arrow-rotate-left"></i></a>

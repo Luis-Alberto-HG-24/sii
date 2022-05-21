@@ -1,3 +1,4 @@
+
 <?php 
     Redireccion::validar_vista("SE");
 ?>

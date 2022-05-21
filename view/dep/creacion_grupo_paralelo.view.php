@@ -95,6 +95,7 @@ Redireccion::validar_vista("DEP");
         </div>
     </div>
 </div>
+<a href="<?=Router::redirigir('dep_dashboard')?>" class="btn btn-flotante"><i class="fa-solid fa-arrow-rotate-left"></i></a>
 
 
 
