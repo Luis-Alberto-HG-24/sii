@@ -50,14 +50,15 @@
             $consulta -> execute([$id]);      
             $resultado = $consulta -> fetch(PDO::FETCH_ASSOC);
             Conector::cerrar_conexion();
-            echo '' . $resultado['estado'];        
+            echo json_encode([$resultado['estado']]);
+                
         }
 
         static function cerrar_sesion_dispositivo($conexion){
             $resultado = self::verificacion_acceso($conexion);
             self::actualizar_estado($conexion, $resultado['id_usuario'], 0);
             Conector::cerrar_conexion();
-            echo json_encode(["1","Cerrando sesion...","login"]);
+            echo json_encode(["1"]);
         }
         
     }
