@@ -27,7 +27,7 @@
         static function obtener_datos_materia($conexion){
             $consulta = $conexion->prepare("SELECT clave, creditos_totales, exclusivo_carrera FROM t_cat_materias WHERE id_cat_materia = ?");
             $consulta -> execute([$_POST['materia']]);
-            $resultado = $consulta -> fetch(PDO::FETCH_ASSOC);
+            $resultado = $consulta -> fetchAll(PDO::FETCH_ASSOC);
             echo json_encode($resultado);
             Conector::cerrar_conexion();
         }
@@ -45,7 +45,7 @@
             $hora_fin = $_POST['hora_fin'];
             $consulta = $conexion->prepare("SELECT * FROM t_horario th INNER JOIN t_grupo tg ON th.id_grupo = tg.id_grupo WHERE th.dia = ? AND th.id_cat_aula = ?  AND tg.id_periodo = ?");
             $consulta -> execute([$_POST['dia'], $_POST['aula'], $_POST['periodo']]);
-            $resultado = $consulta -> fetch(PDO::FETCH_ASSOC);
+            $resultado = $consulta -> fetchAll(PDO::FETCH_ASSOC);
             if($resultado){
                 $respuesta = 1;
                 $hora_ini = 0;
@@ -77,7 +77,7 @@
         static function consultar_semestre($conexion){
             $consulta = $conexion->prepare("SELECT id_semestre, semestre FROM t_semestre WHERE estado = '1'");
             $consulta -> execute();
-            $resultado = $consulta -> fetch(PDO::FETCH_ASSOC);
+            $resultado = $consulta -> fetchAll(PDO::FETCH_ASSOC);
             echo $resultado['semestre'];
             Conector::cerrar_conexion();
         }

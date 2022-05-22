@@ -1,5 +1,5 @@
 <?php 
-    @session_start();
+    session_start();
     class Sesion{
 
         static function crear_sesion($datos_sesion){
