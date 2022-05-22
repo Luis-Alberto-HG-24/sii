@@ -90,12 +90,12 @@
             </a>
         </div>
         <div class="item">
-            <a href="<?=Router::redirigir('aula')?>" title="Aulas">
+            <a href="<?=Router::redirigir('generar_reticula_admin')?>" title="Usuarios">
                 <div class="ico text-center">
-                  <i class="fas fa-door-open"></i>
+                  <i class="fas fa-file"></i>
                 </div>
                 <div class="title">
-                    <span>Aula</span>
+                    <span>Crear Reticula</span>
                 </div>
             </a>
         </div>
@@ -106,6 +106,26 @@
                 </div>
                 <div class="title">
                     <span>Usuarios</span>
+                </div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="<?=Router::redirigir('materias')?>" title="Materias">
+                <div class="ico text-center">
+                  <i class="fas fa-book"></i>
+                </div>
+                <div class="title">
+                    <span>Materias</span>
+                </div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="<?=Router::redirigir('crear_aula_admin')?>" title="Aulas">
+                <div class="ico text-center">
+                  <i class="fas fa-door-open"></i>
+                </div>
+                <div class="title">
+                    <span>Crear Aula</span>
                 </div>
             </a>
         </div>
@@ -203,17 +223,6 @@
             </a>
         </div>
         <?php endif ?>
-        <div class="item">
-            <a href="<?= Router::redirigir('about') ?>" title="Usuario Actual">
-                <div class="ico text-center">
-                <i class="fa-solid fa-address-card"></i>
-                </div>
-                <div class="title">
-                    <span>Información de Usuario</span>
-                </div>
-
-            </a>
-        </div>
         <div class="item">
             <a data-bs-toggle="modal" data-bs-target="#modal_ciclo">
                 <div class="ico text-center">

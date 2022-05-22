@@ -75,6 +75,7 @@
         </div>
     </div>
 </div>
+<a href="dashboard" class="btn btn-flotante"><i class="fa-solid fa-arrow-rotate-left"></i></a>
 
 <?php require_once 'includes/modal_recorte_foto.php';?>
 <link rel="stylesheet" href="<?=LIB_JC?>jcrop.css">

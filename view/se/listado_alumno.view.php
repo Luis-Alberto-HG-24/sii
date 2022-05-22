@@ -29,6 +29,7 @@
         </div>
     </div>
 </div>
+<a href="dashboard" class="btn btn-flotante"><i class="fa-solid fa-arrow-rotate-left"></i></a>
 
 <div id="editar_info" hidden>
    <?php

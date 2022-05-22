@@ -190,7 +190,7 @@ const funciones = {
 	}
 	
 };
-let bgData = {};
+
 
 class Consultas {
 	/**
@@ -269,19 +269,21 @@ class Consultas {
 			});
 	}
 
-	consulta() {
+	seleccion() {
+		let resultado;
 		cargar();
 		fetch(`model/${this.modelo}.model.php`, {
 				method: `${this.metodo}`,
 				body: this.formulario
 			}).then(respuesta => respuesta.json())
 			.then(respuesta => {
-				return respuesta.text();
-				finalizado();										
+				finalizado();
+				resultado = respuesta;										
 			}).catch(error => {
 				finalizado();
 				msj_error(`${error}`);
 			});
+		return resultado;
 	}
 
 	catalogo(input, accion) {
