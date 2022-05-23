@@ -116,9 +116,6 @@ Redireccion::validar_vista("DEP");
     </div>
 </div>
 <a href="<?=Router::redirigir('dep_dashboard')?>" class="btn btn-flotante"><i class="fa-solid fa-arrow-rotate-left"></i></a>
-
-
-
 <!-- 
 <script src="<//?=CONTROLLER?>dep</?=$control = $_GET['view']=="aula_dep" ? "/aula_dep/": "/";?>controller_aula.js"></script>
 <script src="<//?=CONTROLLER?>dep<//?=$control = $_GET['view']=="aula_dep" ? "/aula_dep/": "/";?>controller_lista_aulas.js"></script> -->

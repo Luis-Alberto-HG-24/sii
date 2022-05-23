@@ -95,18 +95,18 @@
         </div>
     </div>
 </div>
-<!-- MODAL PARA LOS MAPAS DE LAS PLANTAS -->
+<a href="<?=Router::redirigir('dashboard')?>" class="btn btn-flotante"><i class="fa-solid fa-arrow-rotate-left"></i></a>
+<!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Mapa</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="img-fluid">
-                    <?php require_once './public/svg/dep/mapa_planta/Planta_Baja_V2_2.php';?>
-                </div>
+                <img src="https://d500.epimg.net/cincodias/imagenes/2020/02/06/lifestyle/1580989436_276779_1580989485_noticia_normal.jpg"
+                    class="img-fluid" alt="">
             </div>
             <div class="modal-footer">
                 <div class="btn-group">
@@ -125,6 +125,7 @@
         </div>
     </div>
 </div>
+
 
 <div class="modal fade" id="aulaActualizar" tabindex="-1" aria-labelledby="aulaModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -193,15 +194,11 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 <button type="button" class="btn btn-primary" id="btn_actualizar">Actualizar Aula</button>
             </div>
         </div>
     </div>
 </div>
-<a href="<?=Router::redirigir('dep_dashboard')?>" class="btn btn-flotante"><i class="fa-solid fa-arrow-rotate-left"></i></a>
-
-
 
 <script src="<?=CONTROLLER?>dep<?=$control = $_GET['view']=="aula_dep" ? "/aula/": "/";?>aula.controller.js"></script>
 <script src="<?=CONTROLLER?>dep<?=$control = $_GET['view']=="aula_dep" ? "/aula/": "/";?>listado_aulas.controller.js"></script>

@@ -1,9 +1,8 @@
 <?php
-$title = "INICIO";
-if (!Sesion::validar_sesion()) {
-    Redireccion::redirigir("login");
-}
-Redireccion::validar_vista("ADMIN");
+    if (!Sesion::validar_sesion()) {
+        Redireccion::redirigir("login");
+    }
+    Redireccion::validar_vista("ADMIN");
 ?>
 
 <div class="container">

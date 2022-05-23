@@ -3,38 +3,34 @@
 var x, y, w, h;
 var ver = 0;
 
-function validar_fotografia() {
+var mostar_area_recorte = function mostar_area_recorte(url) {
+  //$('#recorte_img').attr('src', url);
+  $('#crear').html('<img src="' + url + '" name="recorte_img" id="recorte_img" alt="Foto Alumno"> ');
+  recorte();
+};
+
+var validar_fotografia = function validar_fotografia() {
   var foto = $('#img_alumno').val();
   var extensiones = /(.jpg|.jpeg)$/i;
 
   if (!extensiones.exec(foto)) {
     $('#img_alumno').val("");
-    swal({
-      title: "Error!",
-      text: "Formato de imagen no valido, solo se admiten archivos con extension '.jpg'",
-      icon: "warning",
-      button: "Aceptar"
-    });
+    msj_error("Formato de imagen no valido, solo se admiten archivos con extension \".jpg\"");
     return false;
   } else {
     var peso = $('#img_alumno')[0].files[0].size;
 
     if (peso > 2000 * 1024) {
       $('#img_alumno').val("");
-      swal({
-        title: "Error!",
-        text: "El peso de la imagen no puede ser mayor 2MB!",
-        icon: "warning",
-        button: "Aceptar"
-      });
+      msj_error("El peso de la imagen no puede ser mayor 2MB!");
       return false;
     } else {
       return true;
     }
   }
-}
+};
 
-function handleFileSelect(evt) {
+var handleFileSelect = function handleFileSelect(evt) {
   if (validar_fotografia()) {
     $('#input_file').css("display", "none");
     var archivos = evt.target.files;
@@ -57,11 +53,11 @@ function handleFileSelect(evt) {
       reader.readAsDataURL(archivo);
     }
   }
-}
+};
 
 $('#img_alumno').on('change', handleFileSelect);
 
-function limpiar_foto() {
+var limpiar_foto = function limpiar_foto() {
   $('#input_file').css("display", "block");
   $('#img_foto').html("");
   $('#img_alumno').val("");
@@ -69,82 +65,64 @@ function limpiar_foto() {
   y = "";
   w = "";
   h = "";
-}
+};
 
-function mostar_area_recorte(url) {
-  //$('#recorte_img').attr('src', url);
-  $('#crear').html('<img src="' + url + '" name="recorte_img" id="recorte_img" alt="Foto Alumno"> ');
-  recorte();
-}
-
-function precargar_foto() {
+var precargar_foto = function precargar_foto() {
   ver++;
   $('#input_file').css("display", "none");
   var span = '<span class="btn-cancelar"><a href="#" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><img class="thumb rounded" src="public/img/se/fotografia.webp?ver=' + ver + '" title="Fotografia alumno"/></a><div class="boton-emergente"><button onclick="limpiar_foto()" class="btn btn-img btn-sm" type="button" title="Eliminar"><i class="fas fa-times" style="font-size: 9px; margin-left: -3px"></></button></div></span>';
   $('#img_foto').html(span);
-}
+};
 
-function showCoords(c) {
+var showCoords = function showCoords(c) {
   x = c.x;
   y = c.y;
   w = c.w;
   h = c.h;
-}
+};
 
-;
-
-function recorte() {
+var recorte = function recorte() {
   $('#recorte_img').Jcrop({
     onSelect: showCoords,
     bgColor: 'black',
     bgOpacity: .4,
     aspectRatio: 16 / 16
   });
-}
+};
 
-function recortarImagen() {
+var recortarImagen = function recortarImagen() {
   if (parseInt(w)) {
-    $('#funcion').val("pre_recorte_img");
-    $('#medidas_recorte').val('m' + x + 'm' + y + 'm' + w + 'm' + h);
+    var datos = new FormData($('#frm_login')[0]);
+    datos.append('funcion', "pre_recorte_img");
+    datos.append('medidas_recorte', 'm' + x + 'm' + y + 'm' + w + 'm' + h);
+    var ejecucion = new Consultas("login", datos);
+    ejecucion.insercion();
     $("#cerrar_modal").trigger("click");
     var Form = new FormData($('#frm_creacion_alumno')[0]);
-    opening();
+    cargar();
     $.ajax({
       type: "POST",
       data: Form,
-      url: "model/se/model_creacion_alumno_se.php",
+      url: "model/se/creacion_alumno.model.php",
       processData: false,
       contentType: false,
       success: function success(r) {
         if (r != "Error") {
           $('#img_foto').html("");
           precargar_foto();
-          ending();
-          swal({
-            title: "Proceso finalizado!",
-            icon: "success",
-            text: "La foto se ha recortado de manera correcta!"
-          });
+          finalizar();
+          msj_exito("La foto se ha recortado de manera correcta!");
         } else {
-          ending();
-          swal({
-            title: "Se ha producido un error!",
-            icon: "error",
-            text: "El proceso ha fallado!"
-          });
+          finalizar();
+          msj_error('Se ha producido un error!');
           return false;
         }
       }
     });
   } else {
-    swal({
-      title: "Area no selecionada!",
-      text: "Si quieres conservar la imagen original oprime el boton 'No recortar' de lo contrario selecciona un area e intenta otra vez.",
-      icon: "warning",
-      button: "Aceptar"
-    });
+    msj_error("Si quieres conservar la imagen original oprime el boton 'No recortar' de lo contrario selecciona un area e intenta otra vez.");
   }
-}
+};
 
 $('#btn_recorte').click(function () {
   recortarImagen();

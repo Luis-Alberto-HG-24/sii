@@ -14,17 +14,102 @@
             <div id="avisar"></div>
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-            <ul class="navbar-nav mt-4">
+            <ul class="navbar-nav mt-4 mb-4">
                 <div class="d-flex justify-content-center">
                     <li class="nav-item">
                         <a class="btn btn-primary" href="<?=Router::redirigir('home')?>"><i class="bi bi-house"></i>
-                            Modulos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_ciclo"><i
-                                class="fas fa-calendar"></i> Ciclo</a>
+                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                        </a>
                     </li>
                 </div>
+            </ul>
+            <?php if(Sesion::datos_sesion('rol') == 'ADMIN'):?>
+            <ul class="navbar-nav mt-2">
+                <div class="d-flex justify-content-center">
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="<?=Router::redirigir('generar_reticula_admin')?>"><i class="bi bi-house"></i>
+                            <i class="fas fa-file"></i> Crear Reticula
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="<?=Router::redirigir('usuarios')?>"><i class="bi bi-house"></i>
+                            <i class="fas fa-users"></i> Usuarios
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="<?=Router::redirigir('materias')?>"><i class="bi bi-house"></i>
+                            <i class="fas fa-book"></i> Materias
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="<?=Router::redirigir('usuarios')?>"><i class="bi bi-house"></i>
+                            <i class="fas fa-users"></i> Usuarios
+                        </a>
+                    </li>
+                </div>
+            </ul>
+            <?php elseif(Sesion::datos_sesion('rol') == 'DEP'):?>
+            <ul class="navbar-nav">
+                <div class="d-flex justify-content-center">
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="<?=Router::redirigir('aula_dep')?>"><i class="bi bi-house"></i>
+                            <i class="fas fa-door-open"></i> creacion de aula
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="<?=Router::redirigir('crear_horario_grupo')?>"><i class="bi bi-house"></i>
+                            <i class="fas fa-users"></i> Crear grupos y horarios
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="<?=Router::redirigir('listado_horarios')?>"><i class="bi bi-house"></i>
+                            <i class="fas fa-user-clock"></i> Listado de horarios y grupos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="<?=Router::redirigir('crear_grupo_paralelo')?>"><i class="bi bi-house"></i>
+                            <i class="fas fa-book-open-reader"></i> Crear grupo paralelo
+                        </a>
+                    </li>
+                </div>
+            </ul>
+            <?php elseif(Sesion::datos_sesion("rol") == "SE"):?>
+        <ul class="navbar-nav">
+                <div class="d-flex justify-content-center">
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="<?=Router::redirigir('ctrl')?>"><i class="bi bi-house"></i>
+                            <i class="fas fa-book-open-reader"></i> Creación de número de control
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="<?=Router::redirigir('alumnos')?>"><i class="bi bi-house"></i>
+                            <i class="fas fa-book-open-reader"></i> Creación de alumnos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="<?=Router::redirigir('listado_alumno')?>"><i class="bi bi-house"></i>
+                                <i class="fas fa-book-open-reader"></i> Listado de alumnos
+                        </a>
+                    </li>
+                </div>
+            </ul>
+            <?php elseif(Sesion::datos_sesion("rol") == "ACAD"):?>
+            <ul class="navbar-nav">
+                <div class="d-flex justify-content-center">
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="<?=Router::redirigir('aprobar_ctrl')?>"><i class="bi bi-house"></i>
+                            <i class="fas fa-check-double"></i> Aprobar Numeros de Control
+                        </a>
+                    </li>
+                </div>
+            </ul>
+            <?php endif?>
+            <ul class="navbar-nav mt-4">
+                <li class="nav-item">
+                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_ciclo">
+                        <i class="fas fa-calendar"></i> Ciclo
+                    </a>
+                </li>
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -41,9 +126,7 @@
                         <i class="fas fa-user ml-1"></i> <?=Sesion::datos_sesion("correo_usuario")?>
                     </a>
                     <ul class="dropdown-menu bg-primary text-white text-center" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item btn btn-primary" href="#">Action</a></li>
-                        <li><a class="dropdown-item btn btn-primary" href="#">Another action</a></li>
-                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item btn btn-primary" href="<?= Router::redirigir('about')?>"><i class="fa-solid fa-user-gear"></i> Perfil</a></li>
                         <li>
                             <button type="button" class="dropdown-item btn btn-primary" id="btn_cerrar_sesion_movil"><i
                                     class="fas fa-power-off text-danger"></i> Cerrar Sesion
@@ -146,7 +229,7 @@
                   <i class="fas fa-door-open"></i>
                 </div>
                 <div class="title">
-                    <span>cracion de aula</span>
+                    <span>creacion de aula</span>
                 </div>
             </a>
         </div>
@@ -181,6 +264,16 @@
             </a>
         </div>
         <?php elseif(Sesion::datos_sesion("rol") == "SE"):?>
+        <div class="item">
+            <a href="<?=Router::redirigir('dashboard')?>" title="Dashboard">
+                <div class="ico text-center">
+                  <i class="fas fa-tachometer-alt"></i>
+                </div>
+                <div class="title">
+                    <span>Dashboard</span>
+                </div>
+            </a>
+        </div>
         <div class="item">
             <a href="<?=Router::redirigir('ctrl')?>" title="Creación de número de control">
                 <div class="ico text-center">

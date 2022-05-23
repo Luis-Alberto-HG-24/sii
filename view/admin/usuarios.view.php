@@ -120,8 +120,7 @@
         </div>
     </div>
 </div>
-<a href="dashboard" class="btn btn-flotante"><i class="fa-solid fa-arrow-rotate-left"></i></a>
-
+<a href="<?=Router::redirigir('dashboard')?>" class="btn btn-flotante"><i class="fa-solid fa-arrow-rotate-left"></i></a>
 
 
     <!-- <script src="<//?=CONTROLLER?>admin/usuarios/controller_usuarios.js"></script>

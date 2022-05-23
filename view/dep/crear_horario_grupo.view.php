@@ -1,9 +1,11 @@
 <?php
-    $title = "CREACIÓN DE HORARIOS Y GRUPOS";
-    if (!Sesion::validar_sesion()) {
-        Redireccion::redirigir("login");
+    if($_GET['view'] == "crear_horario_grupo"){
+        $title = "CREACIÓN DE HORARIOS Y GRUPOS";
+        if (!Sesion::validar_sesion()) {
+            Redireccion::redirigir("login");
+        }
+        Redireccion::validar_vista("DEP");
     }
-    Redireccion::validar_vista("DEP");
 ?>
 <div class="container">
     <div class="row mt-5">
@@ -114,7 +116,6 @@
                         <div class="col-lg-12 text-end">
                             <div class="btn-group">
                                 <span class="btn btn-primary" id="ir_asignar_horario"><i class="fas fa-arrow-right me-2"></i>Siguiente</span>
-                                <a href="<?=Router::redirigir('dep_dashboard')?>" class="btn btn-danger"><i class="fas fa-ban me-2"></i>Cancelar</a>
                             </div>
                         </div>
                     </div>
@@ -246,5 +247,7 @@
         </div>
     </form>
 </div>
-<a href="<?=Router::redirigir('dep_dashboard')?>" class="btn btn-flotante"><i class="fa-solid fa-arrow-rotate-left"></i></a>
+<a href="<?=Router::redirigir('dashboard')?>" class="btn btn-flotante"><i class="fa-solid fa-arrow-rotate-left"></i></a>
+<?php if($_GET['view'] == "crear_horario_grupo"):?>
 <script src="<?=CONTROLLER?>dep<?=$control = $_GET['view']=="crear_horario_grupo" ? "/horario_grupo/": "/";?>horario_grupo.controller.js"></script>
+<?php endif?>

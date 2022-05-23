@@ -87,6 +87,11 @@ var restriccion = {
     "msj": "Estructura de correo no valida! en campo "
   }
 };
+
+var limpiar_cadena = function limpiar_cadena(cadena, caracter_busqueda, caracter_remplazo) {
+  return cadena.replace("".concat(caracter_busqueda), "".concat(caracter_remplazo));
+};
+
 var caracter = {
   "numeros": {
     "expresion": /[^0-9]/g,
@@ -123,14 +128,14 @@ var validar_campo = function validar_campo(input, tipo_validacion) {
         var expresion = restriccion["".concat(validacion)].expresion;
         var msj = restriccion["".concat(validacion)].msj;
         input.map(function (nombre) {
-          resultado = expresion.test($("[name=".concat(nombre, "]")).val()) ? resultado : incorrecto(nombre, msj);
+          resultado = expresion.test($("[name=".concat(nombre, "]")).val()) ? resultado : incorrecto(limpiar_cadena(nombre, '_', ' '), msj);
         });
       });
     } else {
       var expresion = restriccion["".concat(tipo_validacion)].expresion;
       var msj = restriccion["".concat(tipo_validacion)].msj;
       input.map(function (nombre) {
-        resultado = expresion.test($("[name=".concat(nombre, "]")).val()) ? resultado : incorrecto(nombre, msj);
+        resultado = expresion.test($("[name=".concat(nombre, "]")).val()) ? resultado : incorrecto(limpiar_cadena(nombre, '_', ' '), msj);
       });
     }
   } else {
@@ -138,12 +143,12 @@ var validar_campo = function validar_campo(input, tipo_validacion) {
       tipo_validacion.map(function (validacion) {
         var expresion = restriccion["".concat(validacion)].expresion;
         var msj = restriccion["".concat(validacion)].msj;
-        resultado = expresion.test($("[name=".concat(input, "]")).val()) ? resultado : incorrecto(input, msj);
+        resultado = expresion.test($("[name=".concat(input, "]")).val()) ? resultado : incorrecto(limpiar_cadena(input, '_', ' '), msj);
       });
     } else {
       var _expresion = restriccion["".concat(tipo_validacion)].expresion;
       var _msj = restriccion["".concat(tipo_validacion)].msj;
-      resultado = _expresion.test($("[name=".concat(input, "]")).val()) ? resultado : incorrecto(input, _msj);
+      resultado = _expresion.test($("[name=".concat(input, "]")).val()) ? resultado : incorrecto(limpiar_cadena(input, '_', ' '), _msj);
     }
   }
 
@@ -195,8 +200,30 @@ var caracter_letras = function caracter_letras(input) {
   });
 };
 
+var caracter_varios = function caracter_varios(input) {
+  $("[name=".concat(input, "]")).on('input', function () {
+    $("[name=".concat(input, "]")).val($("[name=".concat(input, "]")).val().replace(/([^A-Za-z0-9ñÑ])/g, ''));
+  });
+};
+
+var primer_mayuscula = function primer_mayuscula(input) {
+  $("[name=".concat(input, "]")).on('input', function () {
+    $("[name=".concat(input, "]")).val($("[name=".concat(input, "]")).val().charAt(0).toUpperCase() + $("[name=".concat(input, "]")).val().slice(1));
+  });
+};
+
 var limitar_valor = function limitar_valor(input, inicio, fin, msj) {
   return $("[name=".concat(input, "]")).val() > inicio && $("[name=".concat(input, "]")).val() < fin ? true : msj_error(msj);
+};
+
+var longitud_campo = function longitud_campo(input, inicio, fin, msj) {
+  var campo = $("[name=".concat(input, "]")).val();
+  return campo.lenght > inicio && campo.lenght < fin ? true : msj_error(msj);
+};
+
+var longitud_campo_exacta = function longitud_campo_exacta(input, longitud, msj) {
+  var campo = $("[name=".concat(input, "]")).val();
+  return campo.lenght == longitud ? true : msj_error(msj);
 };
 
 var funciones = {
@@ -228,8 +255,48 @@ var Consultas = /*#__PURE__*/function () {
   }
 
   _createClass(Consultas, [{
+    key: "reiniciarSesion",
+    value: function reiniciarSesion(formulario) {
+      cargar();
+      formulario.append('funcion', 'cerrar_sesion_dispositivo');
+      fetch("model/sesion/login.model.php", {
+        method: "POST",
+        body: formulario
+      }).then(function (respuesta) {
+        return respuesta.json();
+      }).then(function (respuesta) {
+        finalizado();
+
+        if (respuesta[0] === "1") {
+          swal({
+            icon: "success",
+            title: "Por favor espere",
+            html: true,
+            text: '\n\n Cerrando sesion en otros dispositivos...',
+            closeOnClickOutside: false,
+            closeOnEsc: false,
+            value: true,
+            buttons: false,
+            timer: 5000
+          }).then(function (value) {
+            var datos = formulario;
+            datos.append('funcion', 'iniciar_sesion');
+            var ejecucion = new Consultas("login", datos);
+            ejecucion.sesion();
+          });
+        } else {
+          msj_error("Se ha producido un error!\n".concat(respuesta[1]));
+        }
+      })["catch"](function (error) {
+        finalizado();
+        msj_error("".concat(error));
+      });
+    }
+  }, {
     key: "sesion",
     value: function sesion() {
+      var _this = this;
+
       cargar();
       fetch("model/sesion/login.model.php", {
         method: "".concat(this.metodo),
@@ -255,17 +322,17 @@ var Consultas = /*#__PURE__*/function () {
           });
         } else if (respuesta[0] === "2") {
           swal({
-            icon: "success",
-            title: "".concat(respuesta[1]),
-            html: true,
-            text: "\n\n Estas siendo redirigido automaticamente...",
-            closeOnClickOutside: false,
-            closeOnEsc: false,
-            value: true,
-            buttons: false,
-            timer: 1500
-          }).then(function (value) {
-            window.location = "".concat(respuesta[2]);
+            title: "No se ha podido iniciar sesion!",
+            text: "".concat(respuesta[1]),
+            icon: "warning",
+            buttons: ["Cancelar", "Aceptar"],
+            dangerMode: true
+          }).then(function (cerrar) {
+            if (cerrar) {
+              _this.reiniciarSesion(_this.formulario);
+            } else {
+              swal("Se ha conservado la sesion anterior!");
+            }
           });
         } else {
           msj_error("Se ha producido un error!\n".concat(respuesta[1]));
@@ -299,9 +366,8 @@ var Consultas = /*#__PURE__*/function () {
       });
     }
   }, {
-    key: "seleccion",
-    value: function seleccion() {
-      var resultado;
+    key: "consulta",
+    value: function consulta() {
       cargar();
       fetch("model/".concat(this.modelo, ".model.php"), {
         method: "".concat(this.metodo),
@@ -309,13 +375,12 @@ var Consultas = /*#__PURE__*/function () {
       }).then(function (respuesta) {
         return respuesta.json();
       }).then(function (respuesta) {
+        return respuesta.text();
         finalizado();
-        resultado = respuesta;
       })["catch"](function (error) {
         finalizado();
         msj_error("".concat(error));
       });
-      return resultado;
     }
   }, {
     key: "catalogo",
