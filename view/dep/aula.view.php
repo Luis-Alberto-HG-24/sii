@@ -60,7 +60,8 @@
                 <label for="agregar_observacion" class="form-label text-center w-100">Agregar observación</label>
                 <div class="form-control border-0 p-0 text-center">
                     <span class="btn btn-outline-primary btn-lg" id="agregar_observacion" name="agregar_observacion"><i
-                            class="fas fa-comment-alt"></i></span>
+                            class="fas fa-comment-alt"></i>
+                    </span>
                 </div>
             </div>
         </div>
