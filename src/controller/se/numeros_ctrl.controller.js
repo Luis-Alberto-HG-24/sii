@@ -78,15 +78,13 @@ $(document).ready(() => {
     }
 
     const validar = ()=> {  //funcion para validar el input de numeros de control
-        if(validar_campo(["num_matriculas"],"numeros")){
+        // if(validar_campo(["num_matriculas"],"numeros")){
            
-        } 
+        // } 
         
         if(limitar_valor("num_matriculas", 1, 200, "Solo puedes ingresar números entre 1 y 200")){
-
-        } else {
             enviar_solicitud();
-        }
+        } 
     }  
 
     const cancelar_solicitud = ()=> { //funcion para cancelar y eliminar la solicitud actual

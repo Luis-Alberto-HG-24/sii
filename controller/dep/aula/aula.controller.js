@@ -178,42 +178,76 @@ $(document).ready(function () {
   };
 
   limitacion_caracteres_aula();
-  limitacion_caracteres_actualizar_aula();
+  limitacion_caracteres_actualizar_aula(); // const agregar_aulas = () => {
+  //     $('#funcion').attr('name', 'funcion');
+  //     $('#funcion').val("agregar_aula");
+  //     var Form = new FormData($('#frm_agregar_aula')[0]);
+  //     opening();
+  //     $.ajax({
+  //         type: "POST",
+  //         data: Form,
+  //         url: "model/admin/aula/model_agregar_aula.php",
+  //         processData: false,
+  //         contentType: false,
+  //         success:(r) => {
+  //             if (r === "1") {
+  //                 remover_colores_capacidad();
+  //                 tabla.ajax.reload(null, false);
+  //                 $('#frm_agregar_aula')[0].reset();
+  //                 $('#funcion_actualizar').removeAttr('name');
+  //                 posicion = 0;
+  //                 ending();
+  //                 swal({
+  //                     title: "Ejecucion completada",
+  //                     icon: "success",
+  //                     text: "Se ha agregado el aula! ",
+  //                 });
+  //             } else {
+  //                 console.log(r);
+  //                 ending();
+  //                 swal({
+  //                     title: "Ejecucion rechazada",
+  //                     icon: "error",
+  //                     text: "ha habido un error al agregar el aula! " + r,
+  //                 });
+  //                 return false;
+  //             }
+  //         }
+  //     });
+  // }
 
   var agregar_aulas = function agregar_aulas() {
     $('#funcion').attr('name', 'funcion');
     $('#funcion').val("agregar_aula");
     var Form = new FormData($('#frm_agregar_aula')[0]);
     opening();
-    $.ajax({
-      type: "POST",
-      data: Form,
-      url: "model/admin/aula/model_agregar_aula.php",
-      processData: false,
-      contentType: false,
-      success: function success(r) {
-        if (r === "1") {
-          remover_colores_capacidad();
-          tabla.ajax.reload(null, false);
-          $('#frm_agregar_aula')[0].reset();
-          $('#funcion_actualizar').removeAttr('name');
-          posicion = 0;
-          ending();
-          swal({
-            title: "Ejecucion completada",
-            icon: "success",
-            text: "Se ha agregado el aula! "
-          });
-        } else {
-          console.log(r);
-          ending();
-          swal({
-            title: "Ejecucion rechazada",
-            icon: "error",
-            text: "ha habido un error al agregar el aula! " + r
-          });
-          return false;
-        }
+    fetch("model/admin/aula/model_agregar_aula.php", {
+      method: "POST",
+      body: Form
+    }).then(function (respuesta) {
+      return respuesta.json();
+    }).then(function (respuesta) {
+      if (respuesta === "1") {
+        remover_colores_capacidad();
+        tabla.ajax.reload(null, false);
+        $('#frm_agregar_aula')[0].reset();
+        $('#funcion_actualizar').removeAttr('name');
+        posicion = 0;
+        ending();
+        swal({
+          title: "Ejecucion completada",
+          icon: "success",
+          text: "Se ha agregado el aulaaaa! "
+        });
+      } else {
+        console.log(respuesta);
+        ending();
+        swal({
+          title: "Ejecucion rechazada",
+          icon: "error",
+          text: "ha habido un error al agregar el aula! " + r
+        });
+        return false;
       }
     });
   };
