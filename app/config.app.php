@@ -1,5 +1,5 @@
 <?php
-    define('TITULO_PAGINA', "Code Blue");
+    define('TITULO_PAGINA', "SII");
     define('SERVIDOR', "http://itma2.sii/");
     define('DEP_CSS', SERVIDOR . "public/css/");
     define('DEP_SCRIPT', SERVIDOR . "public/js/");
@@ -15,12 +15,13 @@
     
     define("direccion", array(
         
-        
+        //general
         'home' => 'view/home.view',
         'info_personal' => 'view/main/info_personal.view',
         'error' => 'view/error/error404.view',
         'login' => 'view/login/login.view',
         'recuperar_contra' => 'view/login/recup_contra.view',
+        'about' => 'view/admin/adminCard.view',
 
 
         // vistas SE
@@ -33,8 +34,6 @@
         // vistas ACAD
         'acad' => 'view/acad/acad_dashboard.view',
         'aprobar_ctrl' => 'view/acad/aprobar_ctrl.view',
-
-       
        
         // vistas ADMIN
         'dashboard' => 'view/admin/admin_dashboard.view',

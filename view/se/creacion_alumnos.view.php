@@ -21,8 +21,6 @@
             <form id="frm_creacion_alumno"  enctype="multipart/form-data" method="POST">
                 <div id="identificacion"></div>
                 <input type="text" id="tk_frm" name="tk_frm" value="<?=Token::generar_token_frm("frm_creacion_alumno")?>" hidden>
-                <input type="text" id="funcion" name="funcion" value="crear_alumno" hidden> 
-                <input type="text" id="medidas_recorte" name="medidas_recorte" value="" hidden> 
                 <h2 class="mb-4"><?=$letrero = $_GET['view']=="listado_alumno" ? "EDITAR INFORMACION ALUMNO" : "CREACION DE ALUMNOS";?></h2>
                 <hr>
 
@@ -75,7 +73,6 @@
         </div>
     </div>
 </div>
-<a href="dashboard" class="btn btn-flotante"><i class="fa-solid fa-arrow-rotate-left"></i></a>
 
 <?php require_once 'includes/modal_recorte_foto.php';?>
 <link rel="stylesheet" href="<?=LIB_JC?>jcrop.css">

@@ -1,3 +1,5 @@
+<?php error_reporting(E_ALL ^ E_NOTICE);?>
+<!DOCTYPE html>
 <!DOCTYPE html>
 <html lang="es">
 <head>

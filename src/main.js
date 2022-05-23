@@ -80,6 +80,10 @@ const restriccion = {
 	}
 };
 
+const limpiar_cadena = (cadena, caracter_busqueda, caracter_remplazo) =>  {
+	return cadena.replace(`${caracter_busqueda}`, `${caracter_remplazo}`);
+}
+
 const caracter = {
 	"numeros": {
 		"expresion": /[^0-9]/g,
@@ -109,14 +113,14 @@ const validar_campo = (input, tipo_validacion, mensaje = "") => {
 				let {expresion} = restriccion[`${validacion}`];
 				let {msj} = restriccion[`${validacion}`];
 				input.map( nombre => { 
-					resultado =  expresion.test( $(`[name=${nombre}]`).val() ) ? resultado : incorrecto(nombre, msj);
+					resultado =  expresion.test( $(`[name=${nombre}]`).val() ) ? resultado : incorrecto(limpiar_cadena(nombre, '_', ' '), msj);
 				});
 			});			
 		} else {
 			const {expresion} = restriccion[`${tipo_validacion}`];
 			const {msj} = restriccion[`${tipo_validacion}`];
 			input.map( nombre => { 
-				resultado =  expresion.test( $(`[name=${nombre}]`).val() ) ? resultado : incorrecto(nombre, msj);
+				resultado =  expresion.test( $(`[name=${nombre}]`).val() ) ? resultado : incorrecto(limpiar_cadena(nombre, '_', ' '), msj);
 			});
 		}	
 	} else {
@@ -124,12 +128,12 @@ const validar_campo = (input, tipo_validacion, mensaje = "") => {
 			tipo_validacion.map( validacion => {
 				let {expresion} = restriccion[`${validacion}`];
 				let {msj} = restriccion[`${validacion}`];
-				resultado = expresion.test( $(`[name=${input}]`).val() ) ?  resultado : incorrecto(input, msj);
+				resultado = expresion.test( $(`[name=${input}]`).val() ) ?  resultado : incorrecto(limpiar_cadena(input, '_', ' '), msj);
 			});			
 		}else{
 			const {expresion} = restriccion[`${tipo_validacion}`];
 			const {msj} = restriccion[`${tipo_validacion}`];
-			resultado = expresion.test( $(`[name=${input}]`).val() ) ?  resultado : incorrecto(input, msj);
+			resultado = expresion.test( $(`[name=${input}]`).val() ) ?  resultado : incorrecto(limpiar_cadena(input, '_', ' '), msj);
 		}
 	}
 	error != "" ? msj_error(mensaje != "" ? mensaje :  `${msj_final} ${error}`) : error;
@@ -172,8 +176,30 @@ const caracter_letras = (input) => {
 	});
 }
 
+const caracter_varios = (input) => {
+	$(`[name=${input}]`).on('input', () => {
+		$(`[name=${input}]`).val($(`[name=${input}]`).val().replace(/([^A-Za-z0-9ñÑ])/g, ''));
+	});
+}
+
+const primer_mayuscula = (input) => {
+	$(`[name=${input}]`).on('input', ()=> {
+		$(`[name=${input}]`).val($(`[name=${input}]`).val().charAt(0).toUpperCase() + $(`[name=${input}]`).val().slice(1));
+	});
+}
+
 const limitar_valor = (input, inicio, fin, msj) => {
 	return $(`[name=${input}]`).val() > inicio && $(`[name=${input}]`).val() < fin ? true : msj_error(msj) ;
+}
+
+const longitud_campo = (input, inicio, fin, msj) => {
+	let campo = $(`[name=${input}]`).val();
+	return campo.lenght > inicio && campo.lenght < fin ? true : msj_error(msj) ;
+}
+
+const longitud_campo_exacta = (input, longitud, msj) => {
+	let campo = $(`[name=${input}]`).val();
+	return campo.lenght == longitud ? true : msj_error(msj) ;
 }
 
 const funciones = {
@@ -191,7 +217,6 @@ const funciones = {
 	
 };
 
-
 class Consultas {
 	/**
 	 * @param {String} modelo nombre del modelo al que se le enviaran los datos
@@ -202,6 +227,41 @@ class Consultas {
 		this.modelo = modelo;
 		this.formulario = formulario;
 		this.metodo = metodo;
+	}
+
+	reiniciarSesion(formulario) {
+		cargar();
+		formulario.append('funcion', 'cerrar_sesion_dispositivo');
+		fetch(`model/sesion/login.model.php`, {
+				method: `POST`,
+				body: formulario
+			}).then(respuesta => respuesta.json())
+			.then(respuesta => {
+				finalizado();
+				if (respuesta[0] === "1") {
+					swal({
+						icon: "success",
+						title: "Por favor espere",
+						html: true,
+						text: '\n\n Cerrando sesion en otros dispositivos...',
+						closeOnClickOutside: false,
+						closeOnEsc: false,
+						value: true,
+						buttons: false,
+						timer: 5000
+					  }).then((value) => {
+						let datos = formulario;
+						datos.append('funcion', 'iniciar_sesion');
+						const ejecucion = new Consultas("login", datos);
+						ejecucion.sesion();
+					  });											
+				}else {
+					msj_error(`Se ha producido un error!\n${respuesta[1]}`);
+				}
+			}).catch(error => {
+				finalizado();
+				msj_error(`${error}`);
+			});
 	}
 
 	sesion() {
@@ -228,18 +288,18 @@ class Consultas {
 					});				
 				} else if (respuesta[0] === "2") {
 					swal({
-						icon: `success`,
-						title: `${respuesta[1]}`,
-						html: true,
-						text: `\n\n Estas siendo redirigido automaticamente...`,
-						closeOnClickOutside: false,
-						closeOnEsc: false,
-						value: true,
-						buttons: false,
-						timer: 1500
-					}).then((value) => {
-						window.location = `${respuesta[2]}`;
-					});				
+						title: "No se ha podido iniciar sesion!",
+						text: `${respuesta[1]}`,
+						icon: "warning",
+						buttons: ["Cancelar", "Aceptar"],
+						dangerMode: true,
+					}).then(cerrar => {
+						if (cerrar) {
+							this.reiniciarSesion(this.formulario);
+						} else {
+							swal("Se ha conservado la sesion anterior!");
+						}
+						});								
 				}else {
 					msj_error(`Se ha producido un error!\n${respuesta[1]}`);
 				}
@@ -248,7 +308,7 @@ class Consultas {
 				msj_error(`${error}`);
 			});
 	}
-	
+
 	insercion() {
 		cargar();
 		fetch(`model/${this.modelo}.model.php`, {
@@ -269,21 +329,19 @@ class Consultas {
 			});
 	}
 
-	seleccion() {
-		let resultado;
+	consulta() {
 		cargar();
 		fetch(`model/${this.modelo}.model.php`, {
 				method: `${this.metodo}`,
 				body: this.formulario
 			}).then(respuesta => respuesta.json())
 			.then(respuesta => {
-				finalizado();
-				resultado = respuesta;										
+				return respuesta.text();
+				finalizado();										
 			}).catch(error => {
 				finalizado();
 				msj_error(`${error}`);
 			});
-		return resultado;
 	}
 
 	catalogo(input, accion) {

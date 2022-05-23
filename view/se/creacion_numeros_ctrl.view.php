@@ -79,7 +79,6 @@
         </div>
     </div>
 </div>
-<a href="dashboard" class="btn btn-flotante"><i class="fa-solid fa-arrow-rotate-left"></i></a>
 
 <script src="<?= CONTROLLER ?>se/tabla_solicitud.controller.js"></script>
 <script src="<?= CONTROLLER ?>se/numeros_ctrl.controller.js"></script>
