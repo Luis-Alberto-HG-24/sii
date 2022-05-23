@@ -46,14 +46,14 @@
                                     <th scope="col">Fecha de Generacion</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="">
 
                             </tbody>
                         </table>
                     </div>
                     <div class="row mt-5">
                         <div class="col-sm-12">
-                                <table id="tabla_datos" class="table table-hover table-sm table-responsive-lg mt-3">
+                                <table id="tabla_solicitud_datos" class="table table-hover table-sm table-responsive-lg mt-3">
                                     <thead>
                                         <tr>
                                             <th class="text-center">
@@ -73,6 +73,9 @@
                                             </th>
                                         </tr>
                                     </thead>
+                                    <tbody id="tabla_datos">
+
+                                    </tbody>
                                 </table>
                         </div>
                     </div>
