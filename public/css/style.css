@@ -3,23 +3,99 @@
     width: 100%;
 }
 
-
-
-.planta-baja path{
-    fill: black;
-}
-
-.planta-baja path:hover{
-    fill: rgb(23, 204, 236);
-    transition: color,0.3s;
-}
-
-
 .AulaA5 path{
     fill: black;
 }
 
 .AulaA5 path:hover{
     fill: rgb(23, 204, 236);
+    transition: color,0.3s;
+
+}
+.Laboratorio_cb path{
+    fill:black;
+}
+.Laboratorio_cb path:hover{
+    fill:rgb(197, 72, 197);
+    transform: color,0.3s;
+}
+.Auditorio path{
+    fill:black
+}
+.Auditorio path:hover{
+    fill: rgb(68, 190, 52);
+    transition: color,0.3s;
+}
+.CDI path{
+    fill: black;
+}
+.CDI path:hover{
+    fill: rgb(219, 97, 88);
+    transition: color,0.3s;
+}
+.Recepcion path{
+    fill:black;
+}
+.Recepcion path:hover{
+    fill:rgb(58, 238, 178);
+    transition: color,0.3s;
+}
+
+.AulaB5 path{
+    fill: black;
+}
+.AulaB5 path:hover{
+    fill: rgb(27, 167, 69);
+    transition: color,0.3s;
+}
+.Dep_AulaB1 path{
+    fill:black;
+}
+.Dep_AulaB1 path:hover{
+    fill:rgb(50, 93, 187);
+    transition: color,0.3s;
+}
+
+.AulaC9 path{
+    fill: black;
+}
+.AulaC9 path:hover{
+    fill: rgb(211, 117, 40);
+    transition: color,0.3s;
+}
+.Laboratorio_Computo1 path{
+    fill: black;
+}
+.Laboratorio_Computo1 path:hover{
+    fill: rgb(102, 91, 196);
+    transition: color,0.3s;
+}
+.Laboratorio_Computo2 path{
+    fill: black;
+}
+.Laboratorio_Computo2 path:hover{
+    fill: rgb(226, 56, 184);
+    transition: color,0.3s;
+}
+
+.AulaD7 path{
+    fill: black;
+}
+.AulaD7 path:hover{
+    fill: rgb(167, 37, 167);
+    transition: color,0.3s;
+}
+.Oficinas path{
+    fill:black;
+}
+.Oficinas path:hover{
+    fill:rgb(221, 32, 32);
+    transition: color,0.3s;
+}
+.Ofi_AulaD1 path{
+    fill:black;
+}
+.Ofi_AulaD1 path:hover{
+    fill:rgb(23, 204, 236);
     transition: color,0.3s;
 }

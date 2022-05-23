@@ -174,7 +174,7 @@ $(document).ready(function () {
        console.log(año_valido_min);
        $('#fecha_nacimiento').attr('max', año_valido);
        $('#fecha_nacimiento').attr('min', año_valido_min);
-     }
+    }
    fecha_nacimient(); */
   //funciones del apartado de numero de control
 

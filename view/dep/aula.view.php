@@ -98,29 +98,51 @@
 <a href="<?=Router::redirigir('dashboard')?>" class="btn btn-flotante"><i class="fa-solid fa-arrow-rotate-left"></i></a>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Mapa</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <img src="https://d500.epimg.net/cincodias/imagenes/2020/02/06/lifestyle/1580989436_276779_1580989485_noticia_normal.jpg"
-                    class="img-fluid" alt="">
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="planta_baja" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <?php require_once './public/svg/dep/mapa_planta/Planta_Baja_V2_2.php';?>
+                    </div>
+                    <div class="tab-pane fade" id="primer_nivel" role="tabpanel" aria-labelledby="pills-profile-tab">
+                        <?php require_once './public/svg/dep/mapa_planta/Primer_Nivel_V2_1.php';?>
+                    </div>
+                    <div class="tab-pane fade" id="segundo_nivel" role="tabpanel" aria-labelledby="pills-contact-tab">
+                        <?php require_once './public/svg/dep/mapa_planta/Segundo_Nivel_V2_1.php';?>
+                    </div>
+                    <div class="tab-pane fade" id="tercer_nivel" role="tabpanel" aria-labelledby="pills-contact-tab">
+                        <?php require_once './public/svg/dep/mapa_planta/Tercer_Nivel_V2.php';?>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-second" data-bs-dismiss="modal"><i
-                            class="fas fa-map-marker-alt me-2"></i>Nivel A</button>
-                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal"><i
-                            class="fas fa-map-marker-alt me-2"></i>Nivel B</button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal"><i
-                            class="fas fa-map-marker-alt me-2"></i>Nivel C</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"><i
-                            class="fas fa-map-marker-alt me-2"></i>Nivel D</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i
-                            class="fas fa-sign-out-alt me-2"></i>Salir</button>
-                </div>
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="btn btn-outline-primary btn-acad me-4" id="planta_baja" data-bs-toggle="pill" data-bs-target="#planta_baja" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+                            Planta Baja
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="btn btn-outline-success btn-acad me-4" id="primer_nivel" data-bs-toggle="pill" data-bs-target="#primer_nivel" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+                            Primer Nivel
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="btn btn-outline-info btn-acad me-4" id="segundo_nivel" data-bs-toggle="pill" data-bs-target="#segundo_nivel" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
+                            Segundo Nivel
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="btn btn-outline-warning btn-acad me-4" id="tercer_nivel" data-bs-toggle="pill" data-bs-target="#tercer_nivel" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
+                            Tercer Nivel
+                        </button>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
